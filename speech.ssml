@@ -1,0 +1,10 @@
+<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xmlns:mstts="https://www.w3.org/2001/mstts" xml:lang="zh-CN">
+    <voice name="en-US-JennyNeural">
+        <mstts:express-as style="shouting">
+            That'd be just amazing!
+        </mstts:express-as>
+        <mstts:express-as style="whispering">
+            That'd be just amazing!
+        </mstts:express-as>
+    </voice>
+</speak>
