@@ -52,6 +52,16 @@ The Speech service is often used to recognize speech from audio files. In this e
 spx recognize --files C:\your_wav_file_dir\*.wav --output file C:\output_dir\speech_output.tsv --threads 10
 ```
 
+## Get speech recognition results
+
+```
+spx recognize --file speechService.wav --output all text --output all file type json
+
+spx recognize --file speechService.wav --output all text --output all file MyRecognition.json
+
+spx recognize --file caption.this.mp4 --format any --output each file - @output.each.detailed
+```
+
 # Azure Open AI REST API Usage from PowerShell
 
 ```powershell
