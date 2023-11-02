@@ -19,6 +19,12 @@ spx config @key --set SPEECH-KEY
 spx config @region --set SPEECH-REGION
 ```
 
+To configure your Speech resource key and region identifier in PowerShell, run the following commands instead:
+```
+spx --% config @key --set SPEECH-KEY
+spx --% config @region --set SPEECH-REGION
+```
+
 # Speech CLI Usage
 
 ## Speech to text (speech recognition)
@@ -44,6 +50,47 @@ You can also save the synthesized output to a file. In this example, let's creat
 ```
 spx synthesize --text "Enjoy using the Speech CLI." --audio output my-sample.wav
 ```
+
+## Speech Synthesis Markup Language (SSML)
+
+Speech Synthesis Markup Language (SSML) is an XML-based markup language that you can use to fine-tune your text to speech output attributes such as pitch, pronunciation, speaking rate, volume, and more. It gives you more control and flexibility than plain text input. For example:
+
+```xml
+<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xmlns:mstts="https://www.w3.org/2001/mstts" xml:lang="en-US">
+    <voice name="en-US-JennyNeural">
+        <mstts:express-as style="sad">
+            You can use Speech Synthesis Markup Language to specify the text to speech voice, language, name, style, and role for your speech output.
+        </mstts:express-as>
+        <mstts:express-as style="whispering">
+            You can use Speech Synthesis Markup Language to specify the text to speech voice, language, name, style, and role for your speech output.
+        </mstts:express-as>
+    </voice>
+    <voice name="en-US-JennyNeural" effect="eq_car">
+        You can use Speech Synthesis Markup Language to specify the text to speech voice, language, name, style, and role for your speech output.
+    </voice>
+</speak>
+```
+
+```
+spx synthesize --file speech.ssml --speakers
+```
+
+## Translate speech
+
+Run the following command to translate speech from the microphone from English to Italian:
+```
+spx translate --source en-US --target it --microphone
+```
+Speak into the microphone, and you see the transcription of your translated speech in real-time. The Speech CLI stops after a period of silence, 30 seconds, or when you press Ctrl+C.
+
+To get speech from an audio file, use --file instead of --microphone. For compressed audio files such as MP4, install GStreamer and use --format. For more information, see [How to use compressed input audio](https://learn.microsoft.com/en-us/azure/ai-services/speech-service/how-to-use-codec-compressed-audio-input-streams).
+```
+spx translate --source en-US --target it --file YourAudioFile.wav
+spx translate --source en-US --target it --file YourAudioFile.mp4 --format any
+```
+To change the speech recognition language, replace en-US with another [supported language](https://learn.microsoft.com/en-us/azure/ai-services/speech-service/language-support?tabs=stt#supported-languages). Specify the full locale with a dash (-) separator. For example, es-ES for Spanish (Spain). The default language is en-US if you don't specify a language.
+
+
 
 ## Batch speech to text (speech recognition)
 
