@@ -51,3 +51,26 @@ The Speech service is often used to recognize speech from audio files. In this e
 ```
 spx recognize --files C:\your_wav_file_dir\*.wav --output file C:\output_dir\speech_output.tsv --threads 10
 ```
+
+# Azure Open AI REST API Usage from PowerShell
+
+```powershell
+$resourceName = "YOUR_OPENAI_RESOURCE_NAME"
+$deploymentName = "YOUR_OPENAI_DEPLOYMENT_NAME"
+
+$speechResponse = Get-Content -Path PATH_TO_JSON_FILE -Raw
+$speechText = (ConvertFrom-Json -InputObject $speechResponse ).'recognizer.recognized.result.text'
+
+$HEADERS = @{
+    'api-key' = "YOUR_OPENAI_KEY"
+    'Content-Type' = "application/json"
+}
+
+$BODY = @{
+    prompt = ('Summarize in one sentence - "{0}"' -f $speechText)
+}
+
+$oaiResponse = Invoke-RestMethod -Method Post -Uri $OAI_URL -Headers $HEADERS -Body ($BODY|ConvertTo-Json)
+$oaiResponse.choices[0].text
+
+```
