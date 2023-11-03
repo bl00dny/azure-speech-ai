@@ -114,6 +114,7 @@ spx recognize --file caption.this.mp4 --format any --output each file - @output.
 ```powershell
 $resourceName = "YOUR_OPENAI_RESOURCE_NAME"
 $deploymentName = "YOUR_OPENAI_DEPLOYMENT_NAME"
+$OAI_URL = "https://$resourceName.openai.azure.com/openai/deployments/$deploymentName/completions?api-version=2023-05-15"
 
 $speechResponse = Get-Content -Path PATH_TO_JSON_FILE -Raw
 $speechText = (ConvertFrom-Json -InputObject $speechResponse ).'recognizer.recognized.result.text'
